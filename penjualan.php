@@ -14,7 +14,7 @@ echo "<b>Daftar Barang yang Dibeli:</b><br><br>";
 $barang_dibeli = [];
 
 for ($i = 0; $i < $jumlah_variasi; $i++) {
-    $index = $i; // ambil urutan sesuai indeks agar tidak duplikat (bisa diganti rand juga)
+    $index = $i;
     $jumlah_beli = rand(1, 10);
 
     $barang_dibeli[] = [
@@ -25,7 +25,7 @@ for ($i = 0; $i < $jumlah_variasi; $i++) {
     ];
 }
 
-// Commit 3 & 4 – Tambahkan total per barang & grand total + tampilkan tabel rapi
+// Commit 3, 4, dan 5 – Tabel + Diskon + Tampilan bawah
 echo "<table border='1' cellpadding='8' cellspacing='0' width='80%' align='center' style='border-collapse:collapse;'>";
 echo "<tr style='background-color:#f2f2f2; text-align:center; font-weight:bold;'>
         <td>Kode</td>
@@ -59,8 +59,9 @@ if ($grand_total <= 50000) {
 }
 
 $diskon = $grand_total * ($persen_diskon / 100);
+$total_bayar = $grand_total - $diskon;
 
-// Tambahkan baris grand total dan diskon
+// Tambahkan baris total, diskon, dan total bayar ke dalam tabel
 echo "<tr style='font-weight:bold; background-color:#f9f9f9;'>
         <td colspan='4' align='right'>Grand Total</td>
         <td>Rp " . number_format($grand_total, 0, ',', '.') . "</td>
@@ -71,9 +72,16 @@ echo "<tr style='font-weight:bold; background-color:#f2f2f2;'>
         <td>Rp " . number_format($diskon, 0, ',', '.') . "</td>
       </tr>";
 
+echo "<tr style='font-weight:bold; background-color:#e0f7e9;'>
+        <td colspan='4' align='right'>Total Bayar</td>
+        <td>Rp " . number_format($total_bayar, 0, ',', '.') . "</td>
+      </tr>";
+
 echo "</table>";
 
-// Garis bawah dan pesan penutup
+// Tampilan bawah
 echo "<hr width='80%'>";
+echo "<p align='center'><b>Total Belanja Anda:</b> Rp " . number_format($total_bayar, 0, ',', '.') . "</p>";
+echo "<p align='center'>Diskon: Rp " . number_format($diskon, 0, ',', '.') . " ({$persen_diskon}%)</p>";
 echo "<p align='center'><i>Terima kasih sudah berbelanja di POLGAN MART 💕</i></p>";
 ?>
