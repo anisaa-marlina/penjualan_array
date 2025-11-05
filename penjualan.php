@@ -14,19 +14,21 @@ echo "<b>Daftar Barang yang Dibeli:</b><br><br>";
 $barang_dibeli = [];
 
 for ($i = 0; $i < $jumlah_variasi; $i++) {
-    $index = $i; // ambil urutan sesuai indeks agar tidak duplikat
+    $index = $i; // ambil urutan sesuai indeks agar tidak duplikat (bisa diganti rand juga)
     $jumlah_beli = rand(1, 10);
 
     $barang_dibeli[] = [
+        "kode" => $kode_barang[$index],
         "nama" => $nama_barang[$index],
         "harga" => $harga_barang[$index],
         "jumlah" => $jumlah_beli
     ];
 }
 
-// Commit 4 – Rapikan tampilan tabel dan tampilkan total belanja
+// Commit 3 & 4 – Tambahkan total per barang & grand total + tampilkan tabel rapi
 echo "<table border='1' cellpadding='8' cellspacing='0' width='80%' align='center' style='border-collapse:collapse;'>";
 echo "<tr style='background-color:#f2f2f2; text-align:center; font-weight:bold;'>
+        <td>Kode</td>
         <td>Nama Barang</td>
         <td>Harga (Rp)</td>
         <td>Jumlah Beli</td>
@@ -39,6 +41,7 @@ foreach ($barang_dibeli as $item) {
     $grand_total += $total;
 
     echo "<tr align='center'>
+            <td>{$item['kode']}</td>
             <td align='left'>{$item['nama']}</td>
             <td>" . number_format($item['harga'], 0, ',', '.') . "</td>
             <td>{$item['jumlah']}</td>
@@ -48,7 +51,7 @@ foreach ($barang_dibeli as $item) {
 
 // Baris grand total
 echo "<tr style='font-weight:bold; background-color:#f9f9f9;'>
-        <td colspan='3' align='right'>Grand Total</td>
+        <td colspan='4' align='right'>Grand Total</td>
         <td>Rp " . number_format($grand_total, 0, ',', '.') . "</td>
       </tr>";
 echo "</table>";
