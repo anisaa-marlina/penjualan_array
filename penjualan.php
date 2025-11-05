@@ -49,17 +49,31 @@ foreach ($barang_dibeli as $item) {
           </tr>";
 }
 
-// Baris grand total
+// Hitung diskon
+if ($grand_total <= 50000) {
+    $persen_diskon = 5;
+} elseif ($grand_total <= 100000) {
+    $persen_diskon = 10;
+} else {
+    $persen_diskon = 20;
+}
+
+$diskon = $grand_total * ($persen_diskon / 100);
+
+// Tambahkan baris grand total dan diskon
 echo "<tr style='font-weight:bold; background-color:#f9f9f9;'>
         <td colspan='4' align='right'>Grand Total</td>
         <td>Rp " . number_format($grand_total, 0, ',', '.') . "</td>
       </tr>";
+
+echo "<tr style='font-weight:bold; background-color:#f2f2f2;'>
+        <td colspan='4' align='right'>Diskon ({$persen_diskon}%)</td>
+        <td>Rp " . number_format($diskon, 0, ',', '.') . "</td>
+      </tr>";
+
 echo "</table>";
 
-// Garis pemisah dan total belanja
+// Garis bawah dan pesan penutup
 echo "<hr width='80%'>";
-echo "<p align='center'><b>Total Belanja Anda:</b> Rp " . number_format($grand_total, 0, ',', '.') . "</p>";
-
-// Pesan penutup
 echo "<p align='center'><i>Terima kasih sudah berbelanja di POLGAN MART 💕</i></p>";
 ?>
