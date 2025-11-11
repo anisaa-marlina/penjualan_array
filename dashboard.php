@@ -1,9 +1,13 @@
 <?php
-// Commit 1 – Setup awal
+// Commit 1 – Rename file menjadi dashboard.php
+// File ini menampilkan halaman utama penjualan (dashboard)
+
+// Data barang
 $kode_barang = ["B001", "B002", "B003", "B004", "B005"];
 $nama_barang = ["Pensil", "Buku Tulis", "Penghapus", "Pulpen", "Spidol"];
 $harga_barang = [2000, 5000, 1500, 3000, 4500];
 
+// Styling dan tampilan
 echo "
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
@@ -107,6 +111,7 @@ echo "
 </style>
 ";
 
+// Konten utama dashboard
 echo "<div class='container'>";
 echo "<h2>-- POLGAN MART --</h2>";
 
@@ -115,13 +120,11 @@ echo "<p style='text-align:center; font-weight:500;'>Daftar Barang yang Dibeli:<
 
 $barang_dibeli = [];
 for ($i = 0; $i < $jumlah_variasi; $i++) {
-    $index = $i;
     $jumlah_beli = rand(1, 10);
-
     $barang_dibeli[] = [
-        "kode" => $kode_barang[$index],
-        "nama" => $nama_barang[$index],
-        "harga" => $harga_barang[$index],
+        "kode" => $kode_barang[$i],
+        "nama" => $nama_barang[$i],
+        "harga" => $harga_barang[$i],
         "jumlah" => $jumlah_beli
     ];
 }
@@ -160,7 +163,6 @@ if ($grand_total <= 50000) {
 $diskon = $grand_total * ($persen_diskon / 100);
 $total_bayar = $grand_total - $diskon;
 
-// Tambahkan baris total, diskon, total bayar
 echo "<tr class='highlight'>
         <td colspan='4' align='right'>Grand Total</td>
         <td>Rp " . number_format($grand_total, 0, ',', '.') . "</td>
